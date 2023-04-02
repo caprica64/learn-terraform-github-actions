@@ -13,8 +13,6 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     
-    if: grep config.json -q 'destroy=true' == 'destroy=true'
-    
     permissions:
       pull-requests: write
     steps:
@@ -70,6 +68,15 @@ jobs:
       - name: Terraform Destroy Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+
+      - name: Checks if should destroy the workload
+        run: |
+          if grep -q 'destroy=true' config.json; then
+            echo "File contains 'destroy=true', running next step"
+          else
+            echo "File does not contain 'destroy=true', skipping next step"
+            exit 1
+          fi
 
       - name: Terraform Destroy
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'

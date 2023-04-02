@@ -13,7 +13,7 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     
-    if: ${{ github.event_name == 'push' && github.event.head_commit.modified | contains('config.json') && fromJSON(github.event.head_commit.message).production == true }}
+    if: contains('config.json')
     
     permissions:
       pull-requests: write

@@ -13,7 +13,7 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     
-    if: contains('config.json')
+    if: grep config.json -q 'destroy=true' == 'destroy=true'
     
     permissions:
       pull-requests: write

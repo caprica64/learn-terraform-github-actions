@@ -7,3 +7,5 @@ This repo is a companion repo to the [Automate Terraform with GitHub Actions tut
 This should trigger an EC2 instance launch with a corresponding Security Group.
 
 To destroy this workspace content, please go back to Terraform Cloud settings and start destroy process from there.
+
+Changes made via another branch with a pull request back to main should trigger deployment.
